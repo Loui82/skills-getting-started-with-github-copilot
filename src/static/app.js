@@ -25,6 +25,16 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <div class="activity-card-participants">
+            <h5>Participants</h5>
+            <ul>
+              ${
+                details.participants && details.participants.length > 0
+                  ? details.participants.map(email => `<li>${email}</li>`).join('')
+                  : '<li><em>No participants yet</em></li>'
+              }
+            </ul>
+          </div>
         `;
 
         activitiesList.appendChild(activityCard);
@@ -40,6 +50,37 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error fetching activities:", error);
     }
   }
+
+  // Not used right now, left here in case some logic can be reused later
+  // function renderActivities(activities) {
+  //   activitiesList.innerHTML = '';
+
+  //   if (activities.length === 0) {
+  //     activitiesList.innerHTML = '<p>No activities available.</p>';
+  //     return;
+  //   }
+
+  //   activities.forEach(activity => {
+  //     const card = document.createElement('div');
+  //     card.className = 'activity-card';
+
+  //     card.innerHTML = `
+  //       <h4>${activity.name}</h4>
+  //       <p>${activity.description}</p>
+  //       <div class="activity-card-participants">
+  //         <h5>Participants</h5>
+  //         <ul>
+  //           ${activity.participants && activity.participants.length > 0
+  //             ? activity.participants.map(email => `<li>${email}</li>`).join('')
+  //             : '<li><em>No participants yet</em></li>'
+  //           }
+  //         </ul>
+  //       </div>
+  //     `;
+
+  //     activitiesList.appendChild(card);
+  //   });
+  // }
 
   // Handle form submission
   signupForm.addEventListener("submit", async (event) => {
